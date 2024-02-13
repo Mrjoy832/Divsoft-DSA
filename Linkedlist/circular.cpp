@@ -147,6 +147,7 @@ int main(){
     l.insertEnd(5);
     
     l.insertEnd(6);
+    
     l.insertAtBegin(1);
 
     l.print();

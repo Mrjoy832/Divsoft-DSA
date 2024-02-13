@@ -15,7 +15,7 @@ arr[0]=-1;
 size=0;
 }
 
-//insertion in maxheap: T.C: logN
+//insertion in maxheap: T.C: logN-->last me daalte hain val then compare korte hain index/2 korke
 void insert(int val){
 size+=1;
 int index=size;
@@ -50,17 +50,22 @@ void deleteFromHeap(){
     while(i<size){
         int left=2*i;
         int right=2*i+1;
+        int largest=i; //// Assume the current node is the largest
 
         if(left<size and arr[i]<arr[left]){
-            swap(arr[i],arr[left]);
-            i=left;
+            largest=left;
         }
-        else if(right<size and arr[i]<arr[right]){
-            swap(arr[i],arr[right]);
+        if(right<size and arr[i]<arr[right]){
+            largest=right;
         }
-        else {
+        // If the current node is already larger than its children, no need to continue
+        if (largest == i) {
             return;
         }
+        
+        // Swap the current node with the largest child
+        swap(arr[i], arr[largest]);
+        i = largest;
     }
 }
 
