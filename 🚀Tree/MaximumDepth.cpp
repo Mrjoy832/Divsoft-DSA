@@ -18,7 +18,7 @@ BinaryTree(){
     root=NULL;
 }
 
-//int max depth or height:
+//int max depth or height: TC - N , SC= N
 int maxDepth(Node*root){
     if(root==NULL)return 0;
     int lh=maxDepth(root->left);

@@ -78,6 +78,13 @@ bool searchRecursive(Node*cur,int k){
     if(k<cur->data)return searchRecursive(cur->left,k);
     else return searchRecursive(cur->right,k);
 }
+//iterative Search
+Node* search(Node*root , int val){
+    while(root!=NULL and root->data!=val){
+        root= val < root->data?root->left:root->right;
+    }
+    return root;
+}
 
 
 // Ceil value: smallest value in tree which is greater than key
@@ -94,6 +101,7 @@ int findCeil(Node*root,int key){
         else{
             ceil=root->data;
             root=root->left;
+            
         }
     }
     return ceil;
@@ -148,19 +156,22 @@ and isValid(t->right, t->data, INT_MAX);
 }
 
 
-//LCA of two nodes:Using recursion (***Error )
-Node* LCA(Node*root , int p , int q){
-    if(root==NULL)return NULL;
-    int cur=root->data;
-    if(cur<p and cur< q){
-        return LCA(root->right,p,q);
-    }
-    if(cur>p and cur>q ){
-        return LCA(root->left,p,q);
-    }
+//LCA of two nodes:Using recursion 
+Node* LCA(Node* root, int p, int q) {
+    if (root == NULL)
+        return NULL;
 
-return root;
+    int cur = root->data;
+    
+    if (cur < p && cur < q) {
+        return LCA(root->right, p, q);
+    } else if (cur > p && cur > q) {
+        return LCA(root->left, p, q);
+    } else {
+        return root;
+    }
 }
+
 
 //deleting a node: O(height)
 
@@ -234,7 +245,7 @@ int main(){
     cout<<bst.BSTorNOT()<<endl;//1
 
 
-;
 
-    cout<<bst.LCAval(30,60);
+
+    cout<<bst.LCAval(30,60)->data;//50
 }

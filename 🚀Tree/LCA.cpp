@@ -18,7 +18,7 @@ BinaryTree(){
     root=NULL;
 }
 
-//LCA
+//LCA: TC -- N , SC---N
 Node* LCA(Node*root, Node*p , Node*q){
     if(root==NULL or root==p or root==q)return root;
 
