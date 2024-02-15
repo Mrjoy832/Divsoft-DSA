@@ -16,7 +16,7 @@ private:
     AVLNode* root;
 
     int getHeight(AVLNode* node) {
-        if (node == nullptr)
+        if (node == NULL)
             return 0;
         return node->height;
     }
@@ -31,9 +31,11 @@ private:
         AVLNode* x = y->left;
         AVLNode* T2 = x->right;
 
+//perform rotation 
         x->right = y;
         y->left = T2;
 
+//update height
         y->height = 1 + std::max(getHeight(y->left), getHeight(y->right));
         x->height = 1 + std::max(getHeight(x->left), getHeight(x->right));
 
@@ -41,6 +43,7 @@ private:
     }
 
     AVLNode* rotateLeft(AVLNode* x) {
+
         AVLNode* y = x->right;
         AVLNode* T2 = y->left;
 

@@ -1,43 +1,64 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void dfs(int node, vector<int>adj[], vector<int>&vis, stack<int>&st){
-    vis[node]=1;
-    for(auto it:adj[node]){
-        if(!vis[it])dfs(it,adj,vis,st);
-    }st.push(node);
-}
+class Graph {
+    int v;
+    vector<int>* adj;
 
-vector<int>topo(int v,vector<int>adj[]){
-    stack<int>st;
-    vector<int>vis(v,0);
-    for(int i=0;i<v;i++){
-        if(!vis[i])dfs(i,adj,vis,st);
+public:
+    Graph(int v) {
+        this->v = v;
+        adj = new vector<int>[v];
     }
 
-    vector<int>ans;
-    while(!st.empty()){
-        ans.push_back(st.top());
-        st.pop();
-    }
-    return ans;
-
-}
-
-int main(){
-    int n,m;
-    cin>>n>>m;
-    vector<int>adj[n];
-    for(int i=0;i<m;i++){
-        int u,v;
-        cin>>u>>v;
+    void addEdge(int u, int v) {
         adj[u].push_back(v);
-        adj[v].push_back(u);
-
     }
 
-    vector<int>ans=topo(n,adj);
-    for(int i=0;i<ans.size();i++){
-        cout<<ans[i]<<" ";
+    // Topological sorting using DFS
+    void topologicalSortUtil(int node, vector<bool>& visited, stack<int>& st) {
+        visited[node] = true;
+        for (int neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                topologicalSortUtil(neighbor, visited, st);
+            }
+        }
+        st.push(node);
     }
+
+    void topologicalSort() {
+        vector<bool> visited(v, false);
+        stack<int> st;
+
+        for (int i = 0; i < v; ++i) {
+            if (!visited[i]) {
+                topologicalSortUtil(i, visited, st);
+            }
+        }
+
+        cout << "Topological Order: ";
+        while (!st.empty()) {
+            cout << st.top() << " ";
+            st.pop();
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    int v = 6;
+    Graph g(v);
+
+    // Adding edges to the graph
+    g.addEdge(5, 2);
+    g.addEdge(5, 0);
+    g.addEdge(4, 0);
+    g.addEdge(4, 1);
+    g.addEdge(2, 3);
+    g.addEdge(3, 1);
+
+    // Finding and printing the topological order
+    g.topologicalSort();
+
+    return 0;
 }

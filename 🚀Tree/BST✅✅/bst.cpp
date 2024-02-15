@@ -175,6 +175,47 @@ Node* LCA(Node* root, int p, int q) {
 
 //deleting a node: O(height)
 
+//1. to find the righest node
+Node* findLastRight(Node*root){
+    if(root->right==NULL)return root;
+
+    return findLastRight(root->right);
+}
+
+//2.adding the right child to the keys left's rigthest node->right
+Node* helper(Node*root){
+    if(root->left==NULL)return root->right;
+    else if(root->right==NULL)return root->left;
+
+    Node*rightChild=root->right;
+    Node*lastRight=findLastRight(root->left);
+    lastRight->right=rightChild;
+    return root->left;
+}
+
+//3. 
+Node* deleteNode(Node*root, int key){
+if(root==NULL)return NULL;
+
+if(root->data==key)return helper(root);
+while(root!=NULL){
+    if(root->data>key){
+        if(root->left!=NULL and root->left->data==key){
+            root->left=helper(root->left);break;
+        }else{
+            root=root->left;
+        }
+    }
+    else{
+        if(root->right!=NULL and root->right->data==key){
+            root->right=helper(root->right);
+            break;
+        }else{
+            root=root->right;
+        }
+    }
+}
+}
 
 
 ////////////////////
@@ -218,6 +259,10 @@ bool BSTorNOT(){
 Node* LCAval(int p,int q){
     return LCA(root,p,q);
 }
+
+void DeleteNode(int k){
+     deleteNode(root,k);
+}
 };
 
 
@@ -232,9 +277,14 @@ int main(){
     bst.insert(40);
     bst.insert(60);
     bst.insert(80);
+    bst.insert(10);
+    bst.insert(35);
+    bst.insert(42);
 
     bst.inOrder();//20 30 40 50 60 70 80 
     cout<<endl;
+    bst.DeleteNode(30);
+    bst.inOrder();
     cout<<bst.ceilValue(45)<<endl;//50
     cout<<bst.floorVal(45)<<endl;//40
     

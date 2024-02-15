@@ -1,5 +1,9 @@
+
+// TC of BFS-- N+E  = N= no of vertices stored in array, E=edges
+
 #include<bits/stdc++.h>
 using namespace std;
+
 
 // A utility function to add an edge in an
 // undirected graph.
@@ -7,6 +11,9 @@ void addEdge(vector<int>adj[], int u,int v){
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
+
+
+
 
 void BFS(vector<int>adj[],int v){
     int  visited[v+1]={0}; // Mark all vertices not-visited initially
