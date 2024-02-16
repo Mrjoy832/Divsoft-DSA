@@ -1,59 +1,66 @@
 #include<bits/stdc++.h>
 using namespace std;
-class Graph{
+
+class Graph {
+public:
     int v;
-    vector<int>*adj;
-    public:
-    Graph(int v){
-        this->v=v;
-        adj= new vector<int>[v+1];
+    vector<int>* adj;
+
+    Graph(int v) {
+        this->v = v;
+        adj = new vector<int>[v];
     }
 
-    void addEdge(int u,int v){
+    void addEdge(int u, int v) {
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
 
-// check bipartite 
-    bool bipartite(int s){
-        queue<int>q;
-        int color[v+1];
-        for(int i=1;i<=v;i++)color[i]=-1;
-        q.push(1);
-        color[1]=1;//putting 1st node color =1
+    bool isBipartite() {
+        vector<int> color(v, -1); // -1 represents uncolored, 0 and 1 represent the two colors
+        queue<int> q;
 
-        while(!q.empty()){
-            int node=q.front();
-            q.pop();
+        for (int i = 0; i < v; ++i) {
+            if (color[i] == -1) {
+                color[i] = 0;//1st node coloured with 0
+                q.push(i);
 
-            for(auto it:adj[node]){
-                if(color[it]!=-1){color[it]=1-color[node];
-                q.push(it);}
-                else if(color[it]==color[node])return false;
+                while (!q.empty()) {
+                    int u = q.front();
+                    q.pop();
+
+                    for (auto it : adj[u]) {
+                        if (color[it] == -1) {
+                            color[it] = 1 - color[u]; // Assign the opposite color
+                            q.push(it);
+                        } else if (color[it] == color[u]) {
+                            return false; // If adjacent nodes have the same color, the graph is not bipartite
+                        }
+                    }
+                }
             }
         }
-        return true;
+
+        return true; // If all components are bipartite
     }
 };
 
+int main() {
+    int v = 5;
+    Graph g(v);
 
-int main(){
-    int v, e;
-        cin >> v >> e;
+    g.addEdge(0, 1);
+    g.addEdge(0, 4);
+    g.addEdge(1, 2);
+    g.addEdge(2, 3);
+    g.addEdge(3, 4);
+    // g.addEdge(4, 5);
 
-        Graph g(v+1);
-        for (int i = 0; i < e; i++) {
-            int u, v;
-            cin >> u >> v;
-            g.addEdge(u, v);
-        }
+    if (g.isBipartite()) {
+        cout << "The graph is bipartite.\n";
+    } else {
+        cout << "The graph is not bipartite.\n";
+    }
 
-        bool ans = g.bipartite(1);// source node=1
-
-        if (ans) {
-            cout << "1";
-        } else {
-            cout << "0";
-        }
-
+    return 0;
 }

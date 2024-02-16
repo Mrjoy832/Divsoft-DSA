@@ -1,3 +1,15 @@
+
+// For dynamic Stack:
+/*
+ int* elements;
+
+ elements= new int[size];
+
+ stack st(100);
+
+*/
+
+
 #include <iostream>
 using namespace std;
 

@@ -11,6 +11,7 @@ class Node{
         data=0;
         next=NULL;
     }
+    
     Node(int data){
         this->data=data;
         this->next=NULL;

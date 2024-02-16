@@ -1,26 +1,23 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Graph{
+class Graph {
+public:
     int v;
-    vector<pair<int,int>>*adj;
-    public:
-    Graph(int v){
-        this->v=v;
-        adj=new vector<pair<int,int>>[v];//node,wt
-    }
-   ~Graph() {
-        delete[] adj;
-    }
-    void addEdge(int u,int v,int wt){
-        adj[u].push_back({v,wt});
-        adj[v].push_back({u,wt});
+    vector<pair<int, int>>* adj;
+
+    Graph(int v) {
+        this->v = v;
+        adj = new vector<pair<int, int>>[v];
     }
 
+    void addEdge(int u, int v, int wt) {
+        adj[u].push_back({v, wt});
+        adj[v].push_back({u, wt});
+    }
 
-
-   void dijkstra(int source){
-    set<pair<int,int>> pq; // dist, node
+    void dijkstra(int source) {
+    set<pair<int, int>> pq;
     vector<int> dist(v, INT_MAX);
 
     pq.insert({0, source});
@@ -35,8 +32,9 @@ class Graph{
             int weight = it.second;
 
             if (dist[u] + weight < dist[v]) {
-                if (dist[v] != INT_MAX) {
-                    pq.erase(pq.find({dist[v], v}));
+                auto f = pq.find({dist[v], v});
+                if (f != pq.end()) {
+                    pq.erase(f);
                 }
                 dist[v] = dist[u] + weight;
                 pq.insert({dist[v], v});
@@ -56,8 +54,8 @@ class Graph{
 
 };
 
-int main(){
- int v = 6;
+int main() {
+    int v = 6;
     Graph g(v);
 
     g.addEdge(0, 1, 5);
@@ -73,4 +71,6 @@ int main(){
 
     int source = 1;
     g.dijkstra(source);
+
+    return 0;
 }

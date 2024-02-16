@@ -17,7 +17,7 @@ class Graph{
 
 // BFS for single componenet
     void BFS(int start){
-        bool *visited=new bool[v+1]{false};
+        bool visited[v+1]={false};
         queue<int>q;
         visited[start]=true;
         q.push(start);
@@ -33,10 +33,11 @@ class Graph{
                 }
             }
         }
+        
     }
 
     // DFS for single Component
-    void DFS(vector)
+    
 };
 
 int main(){
@@ -47,7 +48,7 @@ int main(){
     g.addEdge(3,2);
     g.addEdge(4,2);
     g.addEdge(3,5);
-    g.addEdge(5,7);
+    g.addEdge(5,4);
 
     g.BFS(1);
 }

@@ -3,8 +3,7 @@ using namespace std;
 
 class Graph {
     int v;
-    vector<pair<int, int>>* adj;
-
+    vector<pair<int, int>>* adj;//nide,wt
 public:
     Graph(int v) {
         this->v = v;
@@ -38,7 +37,7 @@ public:
             else {
                 vis[node] = 1;
                 sum += wt;
-                if (parent != -1) {
+                if (parent != -1) {//if parent is not the sourve node
                     edges.push_back({parent, node});
                     cout << "Edge: " << parent << " - " << node << " Weight: " << wt << "\n";
                 }

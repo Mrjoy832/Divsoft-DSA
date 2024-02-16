@@ -20,13 +20,19 @@ BinaryTree(){
 
 //LCA: TC -- N , SC---N
 Node* LCA(Node*root, Node*p , Node*q){
+
+    //if got any one return that
     if(root==NULL or root==p or root==q)return root;
+
 
     Node*left=LCA(root->left,p,q);
     Node*right=LCA(root->right,p,q);
 
+//while goes back
     if(left==NULL)return right;
     else if(right==NULL)return left;
+
+    //in both left and right there are p,q then return the root
     else return root;
 }
 };
