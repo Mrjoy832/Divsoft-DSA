@@ -11,7 +11,7 @@ int arr[100];
 int size;
 
 MaxHeap(){
-arr[0]=-1;
+arr[0]=-1;// 1 based indexing 
 size=0;
 }
 
@@ -36,7 +36,7 @@ while(index>1){
 
 //Deletion:means to delete largest num or the main root:/// TC - logN
 void deleteFromHeap(){
-    if(size==0){
+ if(size==0){
         cout<<"nothing to delete"<<endl;
         return;
     }
@@ -67,6 +67,7 @@ void deleteFromHeap(){
         swap(arr[i], arr[largest]);
         i = largest;
     }
+
 }
 
 //printing the heap:

@@ -18,6 +18,7 @@ public:
         } else if (frontIndex == 0) {
             cout << "Deque overflow at front" << endl;
             return;
+            
         } else {
             frontIndex--;
         }

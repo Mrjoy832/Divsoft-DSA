@@ -107,7 +107,7 @@ int findCeil(Node*root,int key){
     return ceil;
 }
 
-// floor value: smallest value in tree which is greater than key
+// floor value: greatest value in tree which is smaller than key
 int findFloor(Node*p, int key){
     int floor=-1;
     while(p!=NULL){
@@ -152,7 +152,7 @@ if(t==NULL)return true;
 if(t->data>=max or t->data<=min)return false;
 
 return isValid(t->left, min, t->data)
-and isValid(t->right, t->data, INT_MAX);
+and isValid(t->right, t->data, max);
 }
 
 
@@ -181,10 +181,13 @@ Node* findLastRight(Node*root){
 
     return findLastRight(root->right);
 }
-
 //2.adding the right child to the keys left's rigthest node->right
 Node* helper(Node*root){
+
+    //je node del krbo tar left na thakle right subtree return
     if(root->left==NULL)return root->right;
+
+        //je node del krbo tar right na thakle left subtree return
     else if(root->right==NULL)return root->left;
 
     Node*rightChild=root->right;
@@ -192,7 +195,6 @@ Node* helper(Node*root){
     lastRight->right=rightChild;
     return root->left;
 }
-
 //3. 
 Node* deleteNode(Node*root, int key){
 if(root==NULL)return NULL;

@@ -99,6 +99,7 @@ void deleteBegin(){
     else{
         Node*t=head;
         head=head->next;
+        
         if(head)head->prev=NULL;
 
         delete t;

@@ -16,6 +16,7 @@ void push(int val){
         cout<<"overflow";
     }
     else{
+// **if queue is empty must do it ****
         if(isEmpty())front=0;
 
 //inserting into next index

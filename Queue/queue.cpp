@@ -18,6 +18,7 @@ class Queue{
             cout<<"overflow";
             return;
         }
+// **if queue is empty must do it ****
         if(isEmpty()){front=0;}
 
         rear+=1;
@@ -32,6 +33,7 @@ class Queue{
         }
 
         int element=elements[front++];
+        //**
         if(front>rear){
             front=-1;
             rear=-1;
